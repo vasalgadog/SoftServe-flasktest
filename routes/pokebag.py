@@ -11,36 +11,36 @@ logger = logging.getLogger(__name__)
 
 @pokebag.route('/pokemon', methods=['GET'])
 def get_pokemon():
-    logger.info('Show pokemon from pokebag')
-    return pokemon
+    logger.info('Show Pokémon from pokebag')
+    return pokemon, 200
 
 @pokebag.route('/pokemon', methods=['POST'])
 def add_pokemon():
     
     if len(pokemon) >= max_pokemon:
-        logger.error('Try to add more than 6 pokemon')
-        return 'You can\'t have more than 6 pokemon! You must to save on the computer'
+        logger.error('Try to add more than 6 Pokémon')
+        return 'You can\'t have more than 6 Pokémon! You must to save on the computer', 401
     
     pokemon.append(request.json)
-    logger.info('Add pokemon to pokebag')
-    return pokemon
+    logger.info('Pokémon captured and added to pokebag')
+    return pokemon, 200
 
 @pokebag.route('/pokemon/<int:id>', methods=['DELETE'])
 def delete_pokemon(id):
     
     if id > len(pokemon):
-        return 'Pokemon not found!'
+        return 'Pokémon not found!', 404
     
     del pokemon[id]
-    logger.info('Delete pokemon from pokebag')
-    return pokemon
+    logger.info('Transfering Pokémon from pokebag')
+    return pokemon, 200
 
 @pokebag.route('/pokemon/<int:id>', methods=['PUT'])
 def update_pokemon(id):
     
     if id > len(pokemon):
-        return 'Pokemon not found!'
+        return 'Pokémon not found!', 404
     
     pokemon[id] = request.json
-    logger.info('Update pokemon from pokebag')
-    return pokemon
+    logger.info('Update Pokémon from pokebag')
+    return pokemon, 200

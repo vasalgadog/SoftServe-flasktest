@@ -19,7 +19,7 @@ logging.basicConfig(filename='myapp.log', level=logging.INFO)
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'My pokemon collection!'
+    return 'My Pokémon collection!'
 
 @app.route('/view', methods=['GET'])
 def get_pokemon():
